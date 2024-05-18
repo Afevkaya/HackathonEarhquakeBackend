@@ -1,3 +1,5 @@
+using AutoMapper;
+using HackathonEarthquake.Core.DTOs;
 using HackathonEarthquake.Core.DTOs.Response;
 using HackathonEarthquake.Core.Repositories;
 using HackathonEarthquake.Core.Services;
@@ -8,20 +10,23 @@ namespace HackathonEarthquake.Service.Services;
 public class CityService : ICityService
 {
     private readonly ICityRepository _repository;
+    private readonly IMapper _mapper;
 
-    public CityService(ICityRepository repository)
+    public CityService(ICityRepository repository, IMapper mapper)
     {
         _repository = repository;
+        _mapper = mapper;
     }
 
-    public async Task<List<ResponseCityDtos>> GetAllAsync()
+    public async Task<BaseResponseDto<List<ResponseCityDtos>> >GetAllAsync()
     {
         var entites = await _repository.GetAll().ToListAsync();
-        List<ResponseCityDtos> dtosList = new();
-        entites.ForEach(c =>
+        if (entites is { Count: 0 })
         {
-            dtosList.Add(new ResponseCityDtos { Id = c.Id, Name = c.Name });
-        });
-        return dtosList;
+            return BaseResponseDto<List<ResponseCityDtos>>.Fail(404, "Şehir Bulunamadı");
+        }
+
+        var dtos = _mapper.Map<List<ResponseCityDtos>>(entites);
+        return BaseResponseDto<List<ResponseCityDtos>>.Success(200, dtos);
     }
 }
