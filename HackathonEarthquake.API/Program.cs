@@ -1,5 +1,9 @@
 using System.Reflection;
+using HackathonEarthquake.Core.Repositories;
+using HackathonEarthquake.Core.Services;
 using HackathonEarthquake.Repository.Context;
+using HackathonEarthquake.Repository.Repositories;
+using HackathonEarthquake.Service.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
@@ -11,6 +15,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ICityRepository, CityRepository>();
+builder.Services.AddScoped<ICityService, CityService>();
+
 builder.Services.AddDbContext<EarthquakeDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MsSqlConnection"));
@@ -18,14 +25,13 @@ builder.Services.AddDbContext<EarthquakeDbContext>(options =>
 
 var app = builder.Build();
 
-
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseHttpsRedirection();
 
