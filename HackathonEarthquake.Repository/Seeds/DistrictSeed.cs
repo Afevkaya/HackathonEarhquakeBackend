@@ -13,23 +13,7 @@ public class DistrictSeed : IEntityTypeConfiguration<District>
             {
                 Id = 1,
                 Name = "Eyüp",
-                City = new City
-                {
-                    Id = 1,
-                    Name = "İstanbul"
-                },
                 CityId = 1
-            },
-            new District
-            {
-                Id = 2,
-                Name = "Ümraniye",
-                City = new City
-                {
-                    Id = 1,
-                    Name = "İstanbul"
-                },
-                CityId = 1 
             });
     }
 }

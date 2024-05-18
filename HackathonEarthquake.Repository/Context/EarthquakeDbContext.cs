@@ -1,3 +1,4 @@
+using System.Reflection;
 using HackathonEarthquake.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -15,6 +16,12 @@ public class EarthquakeDbContext : DbContext
     public DbSet<District> Districts { get; set; }
     public DbSet<Neighbourhood> Neighbourhoods { get; set; }
     public DbSet<Street> Streets { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        base.OnModelCreating(modelBuilder);
+    }
 }
 
 public class EarthquakeDbContextFactory : IDesignTimeDbContextFactory<EarthquakeDbContext>

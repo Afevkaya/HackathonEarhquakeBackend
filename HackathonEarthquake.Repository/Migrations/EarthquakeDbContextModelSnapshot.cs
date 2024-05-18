@@ -36,6 +36,13 @@ namespace HackathonEarthquake.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "İstanbul"
+                        });
                 });
 
             modelBuilder.Entity("HackathonEarthquake.Core.Entities.District", b =>
@@ -58,6 +65,14 @@ namespace HackathonEarthquake.Repository.Migrations
                     b.HasIndex("CityId");
 
                     b.ToTable("Districts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CityId = 1,
+                            Name = "Eyüp"
+                        });
                 });
 
             modelBuilder.Entity("HackathonEarthquake.Core.Entities.Neighbourhood", b =>
@@ -80,6 +95,14 @@ namespace HackathonEarthquake.Repository.Migrations
                     b.HasIndex("DistrictId");
 
                     b.ToTable("Neighbourhoods");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DistrictId = 1,
+                            Name = "ÇırÇır"
+                        });
                 });
 
             modelBuilder.Entity("HackathonEarthquake.Core.Entities.Street", b =>
@@ -102,6 +125,14 @@ namespace HackathonEarthquake.Repository.Migrations
                     b.HasIndex("NeighbourhoodId");
 
                     b.ToTable("Streets");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Funda",
+                            NeighbourhoodId = 1
+                        });
                 });
 
             modelBuilder.Entity("HackathonEarthquake.Core.Entities.District", b =>
