@@ -1,8 +1,34 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackathonEarthquake.Core", "HackathonEarthquake.Core\HackathonEarthquake.Core.csproj", "{D9C98C8C-F3F3-4284-8ECA-8576E0EC1314}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackathonEarthquake.Repository", "HackathonEarthquake.Repository\HackathonEarthquake.Repository.csproj", "{948EA948-D960-45C3-BDD3-392E02738343}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackathonEarthquake.Service", "HackathonEarthquake.Service\HackathonEarthquake.Service.csproj", "{33BFCADD-480F-4C28-95FD-4BFE43FED8A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackathonEarthquake.API", "HackathonEarthquake.API\HackathonEarthquake.API.csproj", "{0D16CB8C-5C8E-4379-A047-CFE93FD01651}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9C98C8C-F3F3-4284-8ECA-8576E0EC1314}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9C98C8C-F3F3-4284-8ECA-8576E0EC1314}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9C98C8C-F3F3-4284-8ECA-8576E0EC1314}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9C98C8C-F3F3-4284-8ECA-8576E0EC1314}.Release|Any CPU.Build.0 = Release|Any CPU
+		{948EA948-D960-45C3-BDD3-392E02738343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{948EA948-D960-45C3-BDD3-392E02738343}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{948EA948-D960-45C3-BDD3-392E02738343}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{948EA948-D960-45C3-BDD3-392E02738343}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33BFCADD-480F-4C28-95FD-4BFE43FED8A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33BFCADD-480F-4C28-95FD-4BFE43FED8A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33BFCADD-480F-4C28-95FD-4BFE43FED8A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33BFCADD-480F-4C28-95FD-4BFE43FED8A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D16CB8C-5C8E-4379-A047-CFE93FD01651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D16CB8C-5C8E-4379-A047-CFE93FD01651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D16CB8C-5C8E-4379-A047-CFE93FD01651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D16CB8C-5C8E-4379-A047-CFE93FD01651}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
