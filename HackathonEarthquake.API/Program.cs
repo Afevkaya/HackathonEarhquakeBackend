@@ -1,4 +1,3 @@
-using System.Reflection;
 using HackathonEarthquake.Core.Repositories;
 using HackathonEarthquake.Core.Services;
 using HackathonEarthquake.Repository.Context;
@@ -6,7 +5,6 @@ using HackathonEarthquake.Repository.Repositories;
 using HackathonEarthquake.Service.Mapping;
 using HackathonEarthquake.Service.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +24,8 @@ builder.Services.AddDbContext<EarthquakeDbContext>(options =>
 
 builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<ICityService, CityService>();
+builder.Services.AddScoped<IDistrictRepository, DistrictRepository>();
+builder.Services.AddScoped<IDistrictService, DistrictService>();
 
 var app = builder.Build();
 
