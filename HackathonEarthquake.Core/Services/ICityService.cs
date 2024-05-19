@@ -5,5 +5,5 @@ namespace HackathonEarthquake.Core.Services;
 
 public interface ICityService
 {
-    Task<BaseResponseDto<List<ResponseCityDtos>>>GetAllAsync();
+    Task<BaseResponseDto<List<ResponseCityDto>>>GetAllAsync();
 }

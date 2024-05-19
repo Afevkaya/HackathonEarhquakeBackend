@@ -14,6 +14,12 @@ public class DistrictSeed : IEntityTypeConfiguration<District>
                 Id = 1,
                 Name = "Eyüp",
                 CityId = 1
+            },
+            new District
+            {
+                Id = 2,
+                Name = "Ümraniye",
+                CityId = 1
             });
     }
 }

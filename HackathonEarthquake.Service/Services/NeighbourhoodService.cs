@@ -18,14 +18,14 @@ public class NeighbourhoodService : INeighbourhoodService
         _mapper = mapper;
     }
 
-    public async Task<BaseResponseDto<List<NeighbourhoodDto>>> GetAllAsync()
+    public async Task<BaseResponseDto<List<ResponseNeighbourhoodDto>>> GetAllAsync()
     {
         var neighboors = await _repository.GetAll().ToListAsync();
         if (neighboors is { Count: 0 })
-            return BaseResponseDto<List<NeighbourhoodDto>>.Fail(404, "Mahalle Bulunamadı");
+            return BaseResponseDto<List<ResponseNeighbourhoodDto>>.Fail(404, "Mahalle Bulunamadı");
 
-        var dtos = _mapper.Map<List<NeighbourhoodDto>>(neighboors);
-        return BaseResponseDto<List<NeighbourhoodDto>>.Success(200, dtos);
+        var dtos = _mapper.Map<List<ResponseNeighbourhoodDto>>(neighboors);
+        return BaseResponseDto<List<ResponseNeighbourhoodDto>>.Success(200, dtos);
 
     }
 }

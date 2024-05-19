@@ -18,13 +18,13 @@ public class CityService : ICityService
         _mapper = mapper;
     }
 
-    public async Task<BaseResponseDto<List<ResponseCityDtos>> >GetAllAsync()
+    public async Task<BaseResponseDto<List<ResponseCityDto>> >GetAllAsync()
     {
         var cities = await _repository.GetAll().ToListAsync();
         if (cities is { Count: 0 })
-            return BaseResponseDto<List<ResponseCityDtos>>.Fail(404, "Şehir Bulunamadı");
+            return BaseResponseDto<List<ResponseCityDto>>.Fail(404, "Şehir Bulunamadı");
 
-        var dtos = _mapper.Map<List<ResponseCityDtos>>(cities);
-        return BaseResponseDto<List<ResponseCityDtos>>.Success(200, dtos);
+        var dtos = _mapper.Map<List<ResponseCityDto>>(cities);
+        return BaseResponseDto<List<ResponseCityDto>>.Success(200, dtos);
     }
 }

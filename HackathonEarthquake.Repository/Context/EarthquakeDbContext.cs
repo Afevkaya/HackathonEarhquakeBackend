@@ -15,6 +15,7 @@ public class EarthquakeDbContext : DbContext
     public DbSet<City> Cities { get; set; }
     public DbSet<District> Districts { get; set; }
     public DbSet<Neighbourhood> Neighbourhoods { get; set; }
+    public DbSet<MeetingPlace> MeetingPlaces { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

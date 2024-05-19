@@ -17,4 +17,9 @@ public class CityRepository : ICityRepository
     {
         return _dbContext.Cities.AsQueryable();
     }
+
+    public async Task<City> GetByIdAsync(int id)
+    {
+        return await _dbContext.Cities.FindAsync(id)!;
+    }
 }

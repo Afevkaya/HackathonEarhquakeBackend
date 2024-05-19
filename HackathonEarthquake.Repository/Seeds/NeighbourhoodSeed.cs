@@ -12,8 +12,25 @@ public class NeighbourhoodSeed : IEntityTypeConfiguration<Neighbourhood>
             new Neighbourhood
             {
                 Id = 1,
-                Name = "ÇırÇır",
+                Name = "Çırçır",
                 DistrictId = 1
+            },
+            new Neighbourhood
+            {
+                Id = 2,
+                Name = "Karadolap",
+                DistrictId = 1
+            },new Neighbourhood
+            {
+                Id = 3,
+                Name = "Çakmak",
+                DistrictId = 2
+            },
+            new Neighbourhood
+            {
+                Id = 4,
+                Name = "Çamlık",
+                DistrictId = 2
             });
     }
 }

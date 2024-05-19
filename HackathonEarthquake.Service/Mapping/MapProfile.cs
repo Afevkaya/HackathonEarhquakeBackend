@@ -8,8 +8,9 @@ public class MapProfile : Profile
 {
     public MapProfile()
     {
-        CreateMap<City, ResponseCityDtos>();
+        CreateMap<City, ResponseCityDto>();
         CreateMap<District, ResponseDistrictDto>();
-        CreateMap<Neighbourhood, NeighbourhoodDto>();
+        CreateMap<Neighbourhood, ResponseNeighbourhoodDto>();
+        CreateMap<MeetingPlace, ResponseMeetingPlaceDto>();
     }
 }

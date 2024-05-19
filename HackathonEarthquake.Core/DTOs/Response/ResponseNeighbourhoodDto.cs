@@ -1,6 +1,6 @@
 namespace HackathonEarthquake.Core.DTOs.Response;
 
-public class ResponseCityDtos
+public class ResponseNeighbourhoodDto
 {
     public int Id { get; set; }
     public string Name { get; set; }

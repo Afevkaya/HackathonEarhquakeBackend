@@ -26,6 +26,10 @@ builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<IDistrictRepository, DistrictRepository>();
 builder.Services.AddScoped<IDistrictService, DistrictService>();
+builder.Services.AddScoped<INeighbourhoodRepository, NeighbourhoodRepository>();
+builder.Services.AddScoped<INeighbourhoodService, NeighbourhoodService>();
+builder.Services.AddScoped<IMeetingPlaceRepository, MeetingPlaceRepository>();
+builder.Services.AddScoped<IMeetingPlaceService, MeetingPlaceService>();
 
 var app = builder.Build();
 

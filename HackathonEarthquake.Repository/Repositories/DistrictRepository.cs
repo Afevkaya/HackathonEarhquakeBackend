@@ -17,4 +17,9 @@ public class DistrictRepository : IDistrictRepository
     {
         return _dbContext.Districts.AsQueryable();
     }
+
+    public async Task<District> GetByIdAsync(int Id)
+    {
+        return await _dbContext.Districts.FindAsync(Id);
+    }
 }

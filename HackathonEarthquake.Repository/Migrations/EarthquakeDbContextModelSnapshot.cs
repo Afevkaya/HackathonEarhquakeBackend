@@ -72,6 +72,94 @@ namespace HackathonEarthquake.Repository.Migrations
                             Id = 1,
                             CityId = 1,
                             Name = "Eyüp"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CityId = 1,
+                            Name = "Ümraniye"
+                        });
+                });
+
+            modelBuilder.Entity("HackathonEarthquake.Core.Entities.MeetingPlace", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NeighbourhoodId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfBedUsed")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OpenAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TotalNumberOfBed")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MeetingPlaces");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CityId = 1,
+                            DistrictId = 1,
+                            Name = "Çırçır Toplanma Alanı",
+                            NeighbourhoodId = 1,
+                            NumberOfBedUsed = 100,
+                            OpenAddress = "Çırçır Mahallesi Funda Sokak Eyüp/İstanbul",
+                            TotalNumberOfBed = 150
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CityId = 1,
+                            DistrictId = 1,
+                            Name = "Karadolap Toplanma Alanı",
+                            NeighbourhoodId = 1,
+                            NumberOfBedUsed = 75,
+                            OpenAddress = "Karadolap Mahallesi Bilmiyom Sokak Eyüp/İstanbul",
+                            TotalNumberOfBed = 175
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CityId = 1,
+                            DistrictId = 2,
+                            Name = "Çakmak Toplanma Alanı",
+                            NeighbourhoodId = 3,
+                            NumberOfBedUsed = 55,
+                            OpenAddress = "Çakmak Mahallesi Yenigün Sokak Ümraniye/İstanbul",
+                            TotalNumberOfBed = 75
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CityId = 1,
+                            DistrictId = 2,
+                            Name = "Çamlık Toplanma Alanı",
+                            NeighbourhoodId = 4,
+                            NumberOfBedUsed = 95,
+                            OpenAddress = "Çamlık Mahallesi Bilmiyomiki Sokak Ümraniye/İstanbul",
+                            TotalNumberOfBed = 125
                         });
                 });
 
@@ -101,37 +189,25 @@ namespace HackathonEarthquake.Repository.Migrations
                         {
                             Id = 1,
                             DistrictId = 1,
-                            Name = "ÇırÇır"
-                        });
-                });
-
-            modelBuilder.Entity("HackathonEarthquake.Core.Entities.Street", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NeighbourhoodId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NeighbourhoodId");
-
-                    b.ToTable("Streets");
-
-                    b.HasData(
+                            Name = "Çırçır"
+                        },
                         new
                         {
-                            Id = 1,
-                            Name = "Funda",
-                            NeighbourhoodId = 1
+                            Id = 2,
+                            DistrictId = 1,
+                            Name = "Karadolap"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DistrictId = 2,
+                            Name = "Çakmak"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DistrictId = 2,
+                            Name = "Çamlık"
                         });
                 });
 
@@ -157,17 +233,6 @@ namespace HackathonEarthquake.Repository.Migrations
                     b.Navigation("District");
                 });
 
-            modelBuilder.Entity("HackathonEarthquake.Core.Entities.Street", b =>
-                {
-                    b.HasOne("HackathonEarthquake.Core.Entities.Neighbourhood", "Neighbourhood")
-                        .WithMany("Streets")
-                        .HasForeignKey("NeighbourhoodId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Neighbourhood");
-                });
-
             modelBuilder.Entity("HackathonEarthquake.Core.Entities.City", b =>
                 {
                     b.Navigation("Districts");
@@ -176,11 +241,6 @@ namespace HackathonEarthquake.Repository.Migrations
             modelBuilder.Entity("HackathonEarthquake.Core.Entities.District", b =>
                 {
                     b.Navigation("Neighbourhoods");
-                });
-
-            modelBuilder.Entity("HackathonEarthquake.Core.Entities.Neighbourhood", b =>
-                {
-                    b.Navigation("Streets");
                 });
 #pragma warning restore 612, 618
         }

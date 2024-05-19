@@ -17,4 +17,9 @@ public class NeighbourhoodRepository : INeighbourhoodRepository
     {
         return _context.Neighbourhoods.AsQueryable();
     }
+
+    public async Task<Neighbourhood> GetByIdAsync(int Id)
+    {
+        return await _context.Neighbourhoods.FindAsync(Id);
+    }
 }
