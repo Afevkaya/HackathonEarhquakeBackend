@@ -1,7 +1,7 @@
 namespace HackathonEarthquake.Core.Entities;
 
 public class MeetingPlace : BaseEntity
-{
+{ 
     public int TotalNumberOfBed { get; set; }
     public int NumberOfBedUsed { get; set; }
     public int CityId { get; set; }

@@ -9,10 +9,10 @@ public class MapProfile : Profile
 {
     public MapProfile()
     {
-        CreateMap<City, ResponseCityDto>();
-        CreateMap<District, ResponseDistrictDto>();
-        CreateMap<Neighbourhood, ResponseNeighbourhoodDto>();
-        CreateMap<MeetingPlace, ResponseMeetingPlaceDto>();
-        CreateMap<RequestCreateMeetingPlaceDto, MeetingPlace>();
+        CreateMap<City, ResponseCityDto>().ReverseMap();
+        CreateMap<District, ResponseDistrictDto>().ReverseMap();
+        CreateMap<Neighbourhood, ResponseNeighbourhoodDto>().ReverseMap();
+        CreateMap<MeetingPlace, ResponseMeetingPlaceDto>().ReverseMap();
+        CreateMap<RequestCreateMeetingPlaceDto, MeetingPlace>().ReverseMap();
     }
 }

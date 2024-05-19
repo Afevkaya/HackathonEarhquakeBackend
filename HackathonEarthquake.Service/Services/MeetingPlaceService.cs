@@ -31,6 +31,24 @@ public class MeetingPlaceService : IMeetingPlaceService
         _mapper = mapper;
     }
 
+    public async Task<BaseResponseDto<List<ResponseMeetingPlaceDto>>> GetAllAsync()
+    {
+        var entities = await _repository.GetAll().ToListAsync();
+        if (entities is { Count: 0 })
+            return BaseResponseDto<List<ResponseMeetingPlaceDto>>.Fail(404, "Toplanma Alanları bulunamadı");
+        var dtos = _mapper.Map<List<ResponseMeetingPlaceDto>>(entities);
+        return BaseResponseDto<List<ResponseMeetingPlaceDto>>.Success(200, dtos);
+    }
+    public async Task<BaseResponseDto<ResponseMeetingPlaceDto>> GetByIdAsync(int Id)
+    {
+        var entity =await _repository.GetByIdAsync(Id);
+        if (entity is null)
+            return BaseResponseDto<ResponseMeetingPlaceDto>.Fail(404, "Toplanma Alanı Bulunamadı");
+
+        var dto = _mapper.Map<ResponseMeetingPlaceDto>(entity);
+        return BaseResponseDto<ResponseMeetingPlaceDto>.Success(200, dto);
+    }
+
     public async Task<BaseResponseDto<List<ResponseMeetingPlaceDto>>> GetAsync(int cityId, int districtId, int neighbourhoodId)
     {
         var meetingPlaces = await _repository.Get(cityId, districtId, neighbourhoodId).ToListAsync();
@@ -60,6 +78,7 @@ public class MeetingPlaceService : IMeetingPlaceService
         
         return BaseResponseDto<List<ResponseMeetingPlaceDto>>.Success(200, response);
     }
+    
     public async Task<BaseResponseDto<ResponseMeetingPlaceDto>> AddAsync(RequestCreateMeetingPlaceDto dto)
     {
         if (dto is null)
@@ -83,6 +102,8 @@ public class MeetingPlaceService : IMeetingPlaceService
         if (entity is null)
             return BaseResponseDto<NoContentDto>.Fail(404, "Toplanma Alanı Bulunamadı");
 
+        entity.Name = dto.Name;
+        entity.TotalNumberOfBed = dto.TotalNumberOfBed;
         entity.NumberOfBedUsed = dto.NumberOfBedUsed;
         await _repository.AddAsync(entity);
         return BaseResponseDto<NoContentDto>.Success(200);
