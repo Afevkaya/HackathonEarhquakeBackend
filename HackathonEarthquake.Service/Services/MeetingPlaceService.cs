@@ -36,8 +36,27 @@ public class MeetingPlaceService : IMeetingPlaceService
         var entities = await _repository.GetAll().ToListAsync();
         if (entities is { Count: 0 })
             return BaseResponseDto<List<ResponseMeetingPlaceDto>>.Fail(404, "Toplanma Alanları bulunamadı");
-        var dtos = _mapper.Map<List<ResponseMeetingPlaceDto>>(entities);
-        return BaseResponseDto<List<ResponseMeetingPlaceDto>>.Success(200, dtos);
+        
+        
+        
+        List<ResponseMeetingPlaceDto> response = new();
+        entities.ForEach(x =>
+        {
+            response.Add(new ResponseMeetingPlaceDto
+            {
+                Id = x.Id,
+                Name = x.Name,
+                CityName = _cityRepository.GetByIdAsync(x.CityId).Result.Name,
+                DistrictName = _districtRepository.GetByIdAsync(x.DistrictId).Result.Name,
+                NeighbourhoodName = _neighbourhoodRepository.GetByIdAsync(x.NeighbourhoodId).Result.Name,
+                TotalNumberOfBed = x.TotalNumberOfBed,
+                OpenAddress = x.OpenAddress,
+                NumberOfBedUsed = x.NumberOfBedUsed,
+                SolidityRatio = 100*x.NumberOfBedUsed / x.TotalNumberOfBed
+            });
+        });
+        
+        return BaseResponseDto<List<ResponseMeetingPlaceDto>>.Success(200, response);
     }
     public async Task<BaseResponseDto<ResponseMeetingPlaceDto>> GetByIdAsync(int Id)
     {
@@ -45,8 +64,19 @@ public class MeetingPlaceService : IMeetingPlaceService
         if (entity is null)
             return BaseResponseDto<ResponseMeetingPlaceDto>.Fail(404, "Toplanma Alanı Bulunamadı");
 
-        var dto = _mapper.Map<ResponseMeetingPlaceDto>(entity);
-        return BaseResponseDto<ResponseMeetingPlaceDto>.Success(200, dto);
+        var city = await _cityRepository.GetByIdAsync(entity.CityId);
+        var district = await _districtRepository.GetByIdAsync(entity.DistrictId);
+        var neighbourhood = await _neighbourhoodRepository.GetByIdAsync(entity.NeighbourhoodId);
+        
+        ResponseMeetingPlaceDto response = new();
+        response = _mapper.Map<ResponseMeetingPlaceDto>(entity);
+        response.CityName = city.Name;
+        response.DistrictName = district.Name;
+        response.NeighbourhoodName = neighbourhood.Name;
+        response.SolidityRatio = 100 * response.NumberOfBedUsed / response.TotalNumberOfBed;
+        response.OpenAddress = response.OpenAddress;
+        
+        return BaseResponseDto<ResponseMeetingPlaceDto>.Success(200, response);
     }
 
     public async Task<BaseResponseDto<List<ResponseMeetingPlaceDto>>> GetAsync(int cityId, int districtId, int neighbourhoodId)
@@ -69,9 +99,8 @@ public class MeetingPlaceService : IMeetingPlaceService
                 DistrictName = district.Name,
                 NeighbourhoodName = neighbourhood.Name,
                 TotalNumberOfBed = x.TotalNumberOfBed,
-                OpenAddress = city.Name + " " + district.Name + " " + neighbourhood.Name + " " + x.OpenAddress,
+                OpenAddress = x.OpenAddress,
                 NumberOfBedUsed = x.NumberOfBedUsed,
-                
                 SolidityRatio = 100*x.NumberOfBedUsed / x.TotalNumberOfBed
             });
         });
@@ -89,8 +118,18 @@ public class MeetingPlaceService : IMeetingPlaceService
         if (result is null)
             return BaseResponseDto<ResponseMeetingPlaceDto>.Fail(500, "Sistemsel bir hata oluştu");
 
-        var responseDto = _mapper.Map<ResponseMeetingPlaceDto>(result);
-        return BaseResponseDto<ResponseMeetingPlaceDto>.Success(200, responseDto);
+        var city = await _cityRepository.GetByIdAsync(entity.CityId);
+        var district = await _districtRepository.GetByIdAsync(entity.DistrictId);
+        var neighbourhood = await _neighbourhoodRepository.GetByIdAsync(entity.NeighbourhoodId);
+        
+        ResponseMeetingPlaceDto response = new();
+        response = _mapper.Map<ResponseMeetingPlaceDto>(entity);
+        response.CityName = city.Name;
+        response.DistrictName = district.Name;
+        response.NeighbourhoodName = neighbourhood.Name;
+        response.SolidityRatio = 100 * response.NumberOfBedUsed / response.TotalNumberOfBed;
+        response.OpenAddress = response.OpenAddress;
+        return BaseResponseDto<ResponseMeetingPlaceDto>.Success(200, response);
     }
 
     public async Task<BaseResponseDto<NoContentDto>> UpdateAsync(RequestUpdateMeetingPlaceDto dto)
@@ -105,7 +144,7 @@ public class MeetingPlaceService : IMeetingPlaceService
         entity.Name = dto.Name;
         entity.TotalNumberOfBed = dto.TotalNumberOfBed;
         entity.NumberOfBedUsed = dto.NumberOfBedUsed;
-        await _repository.AddAsync(entity);
+        await _repository.UpdateAsync(entity);
         return BaseResponseDto<NoContentDto>.Success(200);
     }
 }

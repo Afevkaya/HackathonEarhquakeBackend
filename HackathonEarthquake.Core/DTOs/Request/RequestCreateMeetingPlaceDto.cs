@@ -3,6 +3,7 @@ namespace HackathonEarthquake.Core.DTOs.Request;
 public class RequestCreateMeetingPlaceDto
 {
     public int Id { get; set; }
+    public string Name { get; set; }
     public int TotalNumberOfBed { get; set; }
     public int NumberOfBedUsed { get; set; }
     public int CityId { get; set; }
