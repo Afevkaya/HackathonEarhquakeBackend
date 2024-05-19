@@ -18,6 +18,8 @@ public class CityController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         var response = await _service.GetAllAsync();
+        if (response.HasError)
+            return BadRequest(response);
         return Ok(response);
     }
 }
