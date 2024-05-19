@@ -10,5 +10,6 @@ public class MapProfile : Profile
     {
         CreateMap<City, ResponseCityDtos>();
         CreateMap<District, ResponseDistrictDto>();
+        CreateMap<Neighbourhood, NeighbourhoodDto>();
     }
 }

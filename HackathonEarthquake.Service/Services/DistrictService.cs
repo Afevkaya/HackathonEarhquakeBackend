@@ -22,9 +22,7 @@ public class DistrictService : IDistrictService
     {
         var districts = await _repository.GetAll().ToListAsync();
         if (districts is { Count: 0 })
-        {
             return BaseResponseDto<List<ResponseDistrictDto>>.Fail(404, "İlçe Bulunamadı");
-        }
 
         var dtos = _mapper.Map<List<ResponseDistrictDto>>(districts);
         return BaseResponseDto<List<ResponseDistrictDto>>.Success(200, dtos);
