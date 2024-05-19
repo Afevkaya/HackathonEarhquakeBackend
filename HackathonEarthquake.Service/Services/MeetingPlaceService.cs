@@ -1,5 +1,6 @@
 using AutoMapper;
 using HackathonEarthquake.Core.DTOs;
+using HackathonEarthquake.Core.DTOs.Request;
 using HackathonEarthquake.Core.DTOs.Response;
 using HackathonEarthquake.Core.Entities;
 using HackathonEarthquake.Core.Repositories;
@@ -58,5 +59,32 @@ public class MeetingPlaceService : IMeetingPlaceService
         });
         
         return BaseResponseDto<List<ResponseMeetingPlaceDto>>.Success(200, response);
+    }
+    public async Task<BaseResponseDto<ResponseMeetingPlaceDto>> AddAsync(RequestCreateMeetingPlaceDto dto)
+    {
+        if (dto is null)
+            return BaseResponseDto<ResponseMeetingPlaceDto>.Fail(400, "Request datası boş");
+
+        var entity = _mapper.Map<MeetingPlace>(dto);
+        var result = await _repository.AddAsync(entity);
+        if (result is null)
+            return BaseResponseDto<ResponseMeetingPlaceDto>.Fail(500, "Sistemsel bir hata oluştu");
+
+        var responseDto = _mapper.Map<ResponseMeetingPlaceDto>(result);
+        return BaseResponseDto<ResponseMeetingPlaceDto>.Success(200, responseDto);
+    }
+
+    public async Task<BaseResponseDto<NoContentDto>> UpdateAsync(RequestUpdateMeetingPlaceDto dto)
+    {
+        if (dto is { Id: 0 }) 
+            return BaseResponseDto<NoContentDto>.Fail(400, "Request Datası boş");
+
+        var entity = await _repository.GetByIdAsync(dto.Id);
+        if (entity is null)
+            return BaseResponseDto<NoContentDto>.Fail(404, "Toplanma Alanı Bulunamadı");
+
+        entity.NumberOfBedUsed = dto.NumberOfBedUsed;
+        await _repository.AddAsync(entity);
+        return BaseResponseDto<NoContentDto>.Success(200);
     }
 }

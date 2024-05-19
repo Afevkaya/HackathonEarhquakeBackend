@@ -1,4 +1,5 @@
 using AutoMapper;
+using HackathonEarthquake.Core.DTOs.Request;
 using HackathonEarthquake.Core.DTOs.Response;
 using HackathonEarthquake.Core.Entities;
 
@@ -12,5 +13,6 @@ public class MapProfile : Profile
         CreateMap<District, ResponseDistrictDto>();
         CreateMap<Neighbourhood, ResponseNeighbourhoodDto>();
         CreateMap<MeetingPlace, ResponseMeetingPlaceDto>();
+        CreateMap<RequestCreateMeetingPlaceDto, MeetingPlace>();
     }
 }

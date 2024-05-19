@@ -18,4 +18,22 @@ public class MeetingPlaceRepository : IMeetingPlaceRepository
         return _context.MeetingPlaces
             .Where(m => m.CityId == cityId && m.DistrictId == districtId && m.NeighbourhoodId == neighbourhoodId);
     }
+
+    public async Task<MeetingPlace> GetByIdAsync(int Id)
+    {
+        return await _context.MeetingPlaces.FindAsync(Id);
+    }
+
+    public async Task<MeetingPlace> AddAsync(MeetingPlace meetingPlace)
+    {
+        await _context.MeetingPlaces.AddAsync(meetingPlace);
+        await _context.SaveChangesAsync();
+        return meetingPlace;
+    }
+
+    public async Task UpdateAsync(MeetingPlace meetingPlace)
+    {
+        _context.Update(meetingPlace);
+        await _context.SaveChangesAsync();
+    }
 }
