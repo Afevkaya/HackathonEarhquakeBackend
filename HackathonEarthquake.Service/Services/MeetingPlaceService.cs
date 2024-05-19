@@ -95,6 +95,7 @@ public class MeetingPlaceService : IMeetingPlaceService
             response.Add(new ResponseMeetingPlaceDto
             {
                 Id = x.Id,
+                Name = x.Name,
                 CityName = city.Name,
                 DistrictName = district.Name,
                 NeighbourhoodName = neighbourhood.Name,
